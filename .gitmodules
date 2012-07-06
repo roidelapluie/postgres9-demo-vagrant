@@ -7,3 +7,6 @@
 [submodule "modules/site"]
 	path = modules/site
 	url = git@github.com:roidelapluie/postgres-9-demo-site.git
+[submodule "modules/stdlib"]
+	path = modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
