@@ -4,3 +4,6 @@
 [submodule "modules/cluster"]
 	path = modules/cluster
 	url = git@github.com:roidelapluie/puppet-cluster.git
+[submodule "modules/site"]
+	path = modules/site
+	url = git@github.com:roidelapluie/postgres-9-demo-site.git
