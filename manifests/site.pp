@@ -73,7 +73,7 @@ node dupond inherits postgres-server {
       require  => Exec['/bin/sleep 10'],
   }
   postgres::createdb {
-    'moulinstart':
+    'moulinsart':
       password => 'rmll2012',
       host     => '192.168.142.30',
       owner    => 'tintin',
