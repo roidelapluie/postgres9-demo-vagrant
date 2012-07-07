@@ -91,7 +91,7 @@ node dupond inherits postgres-server {
       refreshonly => true,
       path        => $::path,
       subscribe   => Exec['load_crm_config'],
-      require     => Exec['/bin/sleep 10'],
+      require     => Exec['/bin/sleep 10', 'crm node online dupond.demo'],
   }
   Class['site'] -> Class['cluster'] -> Class['postgres::firstsync']
   Class['postgres::firstsync'] -> Postgres::Hba[$::fqdn]
