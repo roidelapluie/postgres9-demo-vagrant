@@ -1,0 +1,11 @@
+
+# Postgresql demonstration, made with vagrant
+
+This is a demonstration of postgresql 9.0 high avalability.
+
+Technology used:
+* Vagrant
+* Puppet
+* Centos 6
+
+It was made for the RMLL 2012.
