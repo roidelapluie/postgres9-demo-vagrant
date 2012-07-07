@@ -86,6 +86,13 @@ node dupond inherits postgres-server {
       passwd   => 'icanhazapassword',
       require  => Exec['/bin/sleep 10'],
   }
+  exec {
+    'crm node online dupond.demo':
+      refreshonly => true,
+      path        => $::path,
+      subscribe   => Exec['load_crm_config'],
+      require     => Exec['/bin/sleep 10'],
+  }
   Class['site'] -> Class['cluster'] -> Class['postgres::firstsync']
   Class['postgres::firstsync'] -> Postgres::Hba[$::fqdn]
   Class['cluster'] -> Exec['/bin/sleep 10'] -> Class['postgres::firstsync']
