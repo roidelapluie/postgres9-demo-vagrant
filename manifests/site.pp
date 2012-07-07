@@ -60,14 +60,33 @@ node dupond inherits postgres-server {
       remotehost => 'dupont',
       password   => 'rmll2012',
   }
-  exec { '/bin/sleep 10': }
+  exec {
+    '/bin/sleep 10':
+      refreshonly => true,
+      subscribe   => Exec['load_crm_config'],
+  }
+  postgres::createuser {
+    'tintin':
+      password => 'rmll2012',
+      host     => '192.168.142.30',
+      passwd   => 'milou',
+      require  => Exec['/bin/sleep 10'],
+  }
+  postgres::createdb {
+    'moulinstart':
+      password => 'rmll2012',
+      host     => '192.168.142.30',
+      owner    => 'tintin',
+      require  => [Exec['/bin/sleep 10'],Postgres::Createuser['tintin']],
+  }
   postgres::createsuperuser {
     'replicuser':
       password => 'rmll2012',
       host     => '192.168.142.30',
       passwd   => 'icanhazapassword',
+      require  => Exec['/bin/sleep 10'],
   }
   Class['site'] -> Class['cluster'] -> Class['postgres::firstsync']
   Class['postgres::firstsync'] -> Postgres::Hba[$::fqdn]
-  Class['cluster'] -> Exec['/bin/sleep 10'] -> Postgres::Createsuperuser['replicuser'] -> Class['postgres::firstsync']
+  Class['cluster'] -> Exec['/bin/sleep 10'] -> Class['postgres::firstsync']
 }
